@@ -1,0 +1,65 @@
+<div class="form-container mat-elevation-z5 text-center">
+    <h1>User Profile</h1>
+  
+    <div  class="profile-image">
+      <img
+        
+        width="120"
+        height="120"
+        src={{user.profilePicture}}
+      />
+  
+      <!-- <img *ngIf="imageUrl !== ''" [src]="imageUrl" width="120" height="120" /> -->
+  
+      <button mat-mini-fab name="profile_picture" (click)="upload()">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </div>
+  
+    <div *ngIf="isClicked" class="avatar-container">
+      <div *ngFor="let imgUrl of img">
+        <div (click)="selectedAvatar(imgUrl)">
+          <img [src]="imgUrl" class="avatar-container-item" />
+        </div>
+      </div>
+    </div>
+  <br>
+    <form [formGroup]="updateForm" (ngSubmit)="save(updateForm.value)">
+      <mat-form-field>
+        <input matInput formControlName="name" placeholder="Name" />
+        <mat-error *ngIf="updateForm.controls.name.invalid && (updateForm.controls.name.dirty || updateForm.controls.name.touched)">
+            Please enter a valid name.
+          </mat-error>  
+    </mat-form-field>
+      
+      <mat-form-field>
+        <input matInput formControlName="email" placeholder="Email" />
+        <mat-error *ngIf="updateForm.controls.email.invalid && (updateForm.controls.email.dirty || updateForm.controls.email.touched)">
+            Please enter a valid email address.
+          </mat-error>  
+    </mat-form-field>
+  
+      <mat-form-field>
+        <input matInput formControlName="password" placeholder="Password" />
+        <mat-error *ngIf="updateForm.controls.password.invalid && (updateForm.controls.password.dirty || updateForm.controls.password.touched)">
+            Password must be at least 8 characters long.
+          </mat-error> 
+    </mat-form-field>
+  
+  
+      <mat-form-field>
+        <input matInput formControlName="confirmPassword" placeholder="Confirm Password" />
+        <mat-error *ngIf="updateForm.controls.confirmPassword.invalid && (updateForm.controls.confirmPassword.dirty || updateForm.controls.confirmPassword.touched)">
+            Passwords do not match.
+          </mat-error> 
+    </mat-form-field>
+  
+      <!-- <button type="submit" class="btn-block" mat-stroked-button>
+        Change Password
+      </button> -->
+      <button class="btn-block margin-top" mat-stroked-button type="submit">
+        Save
+      </button>
+    </form>
+  </div>
+  

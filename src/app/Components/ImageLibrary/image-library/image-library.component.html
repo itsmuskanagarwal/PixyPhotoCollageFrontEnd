@@ -1,0 +1,56 @@
+<!-- Image Upload Section -->
+<div class="imgupload">
+<mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Upload Image
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    
+    <div class="image-upload">
+      <ng-container *ngIf="!selectedFiles.length">
+        <ngx-dropzone class="mx-1" (change)="onSelect($event)" (remove)="onRemove($event)">
+          <ngx-dropzone-label>
+              Drag & Drop files here<br>
+              <span style="font-size: 12px">or</span><br>
+              <button class="btn2" >
+                Browse Files
+              </button>
+          </ngx-dropzone-label>
+        </ngx-dropzone>
+      </ng-container>
+
+      <ng-container *ngIf="selectedFiles.length">
+        <div class="selected-images-container">
+          <div class="selected-image" *ngFor="let file of selectedFiles">
+            <!-- <img [src]="file.url" alt="{{file.name}}"> -->
+            <div class="remove-image-btn" (click)="removeSelectedFile(file)">
+              <mat-icon>clear</mat-icon>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+        <div class="row pl-1 m-1 text-center">
+            <div class="col-md-12 text-center">
+                <button mat-raised-button id="upload-button" class="btn " (click)="uploadFiles()">Upload Images</button>
+            </div>
+        </div>
+    </div>
+</mat-expansion-panel>
+</div>
+
+<!-- <div class="img-grid">
+    <div class="img-item" *ngFor="let f of files">
+      <div class="img-preview" [style.background-image]="'url(' + f.dataURL + ')'"></div>
+    </div>
+  </div> -->
+
+  <!-- <div class="img-container">
+    <div class="img-grid">
+      <div class="img-item" *ngFor="let f of files">
+        <div class="img-preview" [style.background-image]="'url(' + f + ')'"></div>
+      </div>
+    </div>
+  </div> -->
+  

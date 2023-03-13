@@ -1,0 +1,33 @@
+<!-- Image Upload Section -->
+<div class="imgupload"  *ngIf="!imageSelected">
+    <mat-expansion-panel [expanded]="true">
+
+        <div *ngIf="imageSelected">
+            <!-- <img [src]="{{file.}}" />           -->
+          </div>
+
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Upload Image
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="image-upload">
+            <ngx-dropzone class="mx-1" (change)="onSelect($event)" (remove)="onRemove($event)">
+              <ngx-dropzone-label>
+                  Drag & Drop files here<br>
+                  <span style="font-size: 12px">or</span><br>
+                  <button class="btn2" >
+                    Browse Files
+                  </button>
+              </ngx-dropzone-label>
+            </ngx-dropzone>
+            <div class="row pl-1 m-1 text-center">
+                <div class="col-md-12 text-center">
+                    <button mat-raised-button id="upload-button" class="btn " (click)="uploadFiles()">Upload Images</button>
+                </div>
+            </div>
+        </div>
+    </mat-expansion-panel>
+    </div>
+
+   

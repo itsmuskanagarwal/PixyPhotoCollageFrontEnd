@@ -1,0 +1,77 @@
+<body>
+  <div class="container">
+    <!-- <h2><span>Editing Tab</span></h2>
+    <hr> -->
+    <div class="dropdown">
+        <button class="dropdown-toggle" >Select Count</button>
+        <div class="dropdown-content">
+            <a href="#">2 Image Layout</a>
+            <a href="#">4 Image Layout</a>
+            <a href="#">6 Image Layout</a>
+            <a href="#">8 Image Layout</a>
+            <a href="#">16 Image Layout</a>
+        </div>
+        
+        <div class = "smallcontainerdrop"> 
+            <div class="box" *ngFor="let img of images">
+                <img class="uploadimg" [src] = "img">
+            </div>
+        </div>
+    </div>
+    
+    <button class="upload-btn">Add Images</button>
+    <div class = "smallcontainer"> 
+    <div class="box" *ngFor="let img of images">
+        <img class="uploadimg" [src] = "img">
+    </div>
+    </div>
+
+    <div class="label-dropdown">
+      <!-- <label class="label">Border:</label> -->
+      <div class="border-slider">
+        <label class="border-slider-label">Border:</label>
+        <input type="range" min="0" max="10" value="0" class="border-slider-input">
+      </div>
+      <!-- <label class="label">Color:</label> -->
+      <div class="color-dropdown">
+        <label class="color-dropdown-label">Colour:</label>
+        <div class="color-dropdown-squares">
+          <div class="color-square" style="background-color: #DFFFD8;"></div>
+          <div class="color-square" style="background-color: #F7C8E0;"></div>
+          <div class="color-square" style="background-color: #FD8A8A
+          ;"></div>
+          <div class="color-square" style="background-color: #A8D1D1;"></div>
+          <div class="color-square" style="background-color: #95BDFF;"></div>
+          <div class="color-square" style="background-color: #9EA1D4;"></div>
+          </div>
+        </div>
+        </div>
+    <br>
+    <button class="create-btn">Create Collage</button>
+    <button class="reset-btn">Reset</button>
+  </div>
+
+  <!-- Main Canvas -->
+
+  <div class="main-canvas">
+    <div class="sub-canvas">
+      <img class="collage" src="./assets/temp.jpeg">
+    </div>
+    <button class="btn save-btn">Save</button>
+    <button class="btn send-btn">Send</button>
+    <button class="btn download-btn">Download</button>
+  </div>
+
+  <div class="side-container">
+    <h1>Community</h1>
+    <hr>
+    <div *ngFor="let user of users">
+      <label class="checkbox-container">
+        <input type="checkbox">
+        {{user.name}}
+        <span class="checkmark"></span>
+      </label>
+    </div>
+    <button class="btn send-btn-side"> Send </button>
+  </div>
+</body>

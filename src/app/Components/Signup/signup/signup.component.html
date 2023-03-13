@@ -1,0 +1,252 @@
+<body>
+<div class="session">
+  <form
+    action=""
+    class="log-in"
+    autocomplete="off"
+    [formGroup]="formData"
+    (ngSubmit)="onClickSubmit(formData.value)"
+  >
+    <h4>We are <span>PIXy!</span></h4>
+    <p>Welcome! Create your own account and enjoy working:</p>
+    <div class="floating-label">
+      <input
+        placeholder="Name"
+        type="text"
+        name="name"
+        id="name"
+        autocomplete="off"
+        formControlName="name"
+      />
+      <!-- <label for="password">Password:</label> -->
+      <div class="icon">
+        <svg
+          enable-background="new 0 0 24 24"
+          version="1.1"
+          viewBox="0 0 24 24"
+          xml:space="preserve"
+          xmlns="http://www.w3.org/2000/svg"
+          width="22px"
+          height="22px"
+        >
+          <style type="text/css">
+            .st0 {
+              fill: none;
+            }
+            .st1 {
+              fill: #010101;
+            }
+          </style>
+          <rect class="st0" width="15" height="15" />
+          <path
+            d="M13.7778 9.33333C13.7778 10.3152 12.9818 11.1111 12 11.1111C11.0182 11.1111 10.2222 10.3152 10.2222 9.33333C10.2222 8.35149 11.0182 7.55556 12 7.55556C12.9818 7.55556 13.7778 8.35149 13.7778 9.33333Z"
+            stroke="#464455"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M13.5895 12.8889H10.4105C10.1245 12.8889 9.98155 12.8889 9.85366 12.9094C9.41106 12.9803 9.02832 13.2294 8.8139 13.5862C8.75195 13.6893 8.70674 13.8118 8.61631 14.0568C8.50766 14.3512 8.45334 14.4984 8.44599 14.6171C8.42008 15.0359 8.72189 15.4141 9.17002 15.5243C9.29703 15.5556 9.46883 15.5556 9.81241 15.5556H14.1876C14.5312 15.5556 14.703 15.5556 14.83 15.5243C15.2781 15.4141 15.5799 15.0359 15.554 14.6171C15.5467 14.4984 15.4923 14.3512 15.3837 14.0568C15.2933 13.8118 15.2481 13.6893 15.1861 13.5862C14.9717 13.2294 14.5889 12.9803 14.1463 12.9094C14.0184 12.8889 13.8755 12.8889 13.5895 12.8889Z"
+            stroke="#464455"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+    </div>
+
+    <mat-error>
+      <div
+        *ngIf="
+          formData.get('name').invalid &&
+          (formData.get('name').dirty || formData.get('name').touched)
+        "
+      >
+        <div *ngIf="formData.get('name').hasError('required')">
+          Name is required.
+        </div>
+      </div>
+    </mat-error>
+
+    <div class="floating-label">
+      <input
+        placeholder="Email"
+        type="email"
+        name="email"
+        id="email"
+        formControlName="email"
+        autocomplete="off"
+      />
+      <!-- <label for="email">Email:</label> -->
+      <div class="icon">
+        <svg
+          enable-background="new 0 0 100 100"
+          version="1.1"
+          viewBox="0 0 100 100"
+          xml:space="preserve"
+          xmlns="https://www.svgrepo.com/show/489814/user-box.svg"
+        >
+          <style type="text/css">
+            .st0 {
+              fill: none;
+            }
+          </style>
+          <g transform="translate(0 -952.36)">
+            <path
+              d="m17.5 977c-1.3 0-2.4 1.1-2.4 2.4v45.9c0 1.3 1.1 2.4 2.4 2.4h64.9c1.3 0 2.4-1.1 2.4-2.4v-45.9c0-1.3-1.1-2.4-2.4-2.4h-64.9zm2.4 4.8h60.2v1.2l-30.1 22-30.1-22v-1.2zm0 7l28.7 21c0.8 0.6 2 0.6 2.8 0l28.7-21v34.1h-60.2v-34.1z"
+            />
+          </g>
+          <rect class="st0" width="100" height="100" />
+        </svg>
+      </div>
+    </div>
+
+    <mat-error>
+      <div
+        *ngIf="
+          formData.get('email').invalid &&
+          (formData.get('email').dirty || formData.get('email').touched)
+        "
+      >
+        <div *ngIf="formData.get('email').hasError('required')">
+          Email is required.
+        </div>
+        <div *ngIf="formData.get('email').hasError('email')">
+          Please enter a valid email address.
+        </div>
+      </div>
+    </mat-error>
+    <mat-error>
+      <div *ngIf="validEmail == false">
+        <div class="error">
+          <span> {{ msg.email }} </span>
+        </div>
+      </div>
+    </mat-error>
+    <div class="floating-label">
+      <input
+        placeholder="Password"
+        type="password"
+        name="password"
+        id="password"
+        autocomplete="off"
+        formControlName="password"
+      />
+      <!-- <label for="password">Password:</label> -->
+      <div class="icon">
+        <svg
+          enable-background="new 0 0 24 24"
+          version="1.1"
+          viewBox="0 0 24 24"
+          xml:space="preserve"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <style type="text/css">
+            .st0 {
+              fill: none;
+            }
+            .st1 {
+              fill: #010101;
+            }
+          </style>
+          <rect class="st0" width="15" height="15" />
+          <path
+            d="M5 8H13.75M5 12H19M10.25 16L19 16"
+            stroke="#464455"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+    </div>
+    <mat-error>
+      <div
+        *ngIf="
+          formData.get('password').invalid &&
+          (formData.get('password').dirty || formData.get('password').touched)
+        "
+      >
+        <div *ngIf="formData.get('password').hasError('required')">
+          Password is required.
+        </div>
+        <div *ngIf="formData.get('password').hasError('minlength')">
+          Password must be at least 8 characters long.
+        </div>
+      </div> 
+    </mat-error>
+    <mat-error>
+      <div *ngIf="validPassword == false">
+        <div class="error">
+          <span> {{ msg.password }} </span>
+        </div>
+        <br />
+      </div>
+    </mat-error>
+    <div class="floating-label">
+      <input
+        placeholder="Confirm Password"
+        type="password"
+        name="confirmpassword"
+        id="confirmpassword"
+        autocomplete="off"
+        formControlName="confirmPassword"
+      />
+
+      <div class="icon">
+        <svg
+          enable-background="new 0 0 24 24"
+          version="1.1"
+          viewBox="0 0 24 24"
+          xml:space="preserve"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect class="st0" width="20" height="20" />
+          <path
+            d="M5 8H13.75M5 12H19M10.25 16L19 16"
+            stroke="#464455"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+    </div>
+    <mat-error>
+      <div
+        *ngIf="
+          formData.get('confirmPassword').invalid &&
+          (formData.get('confirmPassword').dirty ||
+            formData.get('confirmPassword').touched)
+        "
+      >
+        <div *ngIf="formData.get('confirmPassword').hasError('required')">
+          Confirm password is required.
+        </div>
+        <div *ngIf="formData.get('confirmPassword').hasError('minlength')">
+          Password must be at least 8 characters long.
+        </div>
+      </div>
+    </mat-error>
+    
+    <mat-error>
+      <div *ngIf="validFields == false">
+        <br />
+        <div class="error">
+          <span> {{ msg.feilds }} </span>
+        </div>
+        <br />
+      </div>
+    </mat-error>
+    <button type="submit">Register</button>
+    <a class="discrete" routerLink="/login">Login here!</a>
+  </form>
+  <div class="right">
+    <svg
+      enable-background="new 0 0 300 302.5"
+      version="1.1"
+      viewBox="0 0 300 302.5"
+      xml:space="preserve"
+      xmlns="http://www.w3.org/2000/svg"
+    ></svg>
+  </div>
+</div>
+</body>

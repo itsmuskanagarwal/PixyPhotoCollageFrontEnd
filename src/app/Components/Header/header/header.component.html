@@ -1,0 +1,23 @@
+<div *ngIf="isLoggedIn">
+<nav class="menu" tabindex="0">
+	<!-- <div class="smartphone-menu-trigger"></div> -->
+  <header class="avatar">
+		<img src={{user.profilePicture}} />
+    <h2>{{user.name}}</h2>
+    <h6>{{user.email}}</h6>
+  </header>
+	<ul>
+    <li tabindex="0" class="icon-editor" routerLink="/editor"><span> Editor</span></li>
+    <li tabindex="0" class="icon-project" routerLink="/projects"><span> Projects</span></li>
+    <li tabindex="0" class="icon-library" routerLink="/imglibrary"><span> Library</span></li>
+    <li tabindex="0" class="icon-profile" routerLink="/profile"><span>Profile</span></li>
+    <li tabindex="0" class="icon-contact" routerLink="/contact"><span>Contact</span></li>
+    <li ><button class="button-4" (click)="logout()">Logout</button></li>
+  </ul>
+</nav>
+
+</div>
+
+
+
+

@@ -1,0 +1,19 @@
+<body>
+  <div class="header">
+    <h1>My Project</h1>
+    <span class="icon">&#x1F43E;</span>
+  </div>
+
+  <div class="container">
+    <div *ngIf="projects > 0">
+      <div class="box" *ngFor="let img of images">
+        <div class=" img-wrapper">
+          <img class="finalimg" [src]="img">         
+        </div>
+        <button class="btn save-btn" >Save</button>
+        <button class="btn send-btn" >Send</button>
+        <button class="btn delete-btn">Delete</button>
+      </div>
+    </div>
+  </div>
+</body>

@@ -1,0 +1,58 @@
+<form class="form" [formGroup]="contactForm" (ngSubmit)="onSubmit(contactForm.value)" >
+    <h2>CONTACT US</h2>
+    <p type="Name:"><input placeholder="Write your name here.." formControlName="name"></p>
+    <span
+        class="error-message"
+        *ngIf="contactForm.get('name')?.invalid && (contactForm.get('name')?.dirty || contactForm.get('name')?.touched)"
+      >
+        Name is required
+      </span>
+    <p type="Email:"><input placeholder="Let us know how to contact you back.." formControlName="email"></p>
+    <span
+        class="error-message"
+        *ngIf="contactForm.get('email')?.invalid && (contactForm.get('email')?.dirty || contactForm.get('email')?.touched)"
+      >
+        Email is required and should be in a valid format
+      </span>
+    <p type="Message:"><input placeholder="What would you like to tell us.." formControlName="message"></p>
+    <span
+    class="error-message"
+    *ngIf="contactForm.get('message')?.invalid && (contactForm.get('message')?.dirty || contactForm.get('message')?.touched)"
+  >
+    Message is required
+  </span>
+    <button  [disabled]="!contactForm.valid">Send Message</button>
+  </form>
+
+  <!-- <form [formGroup]="contactForm" class="form" (ngSubmit)="onSubmit()">
+    <h2>CONTACT US</h2>
+    <p>
+      <input placeholder="Write your name here.." formControlName="name" />
+      <span
+        class="error-message"
+        *ngIf="contactForm.get('name')?.invalid && (contactForm.get('name')?.dirty || contactForm.get('name')?.touched)"
+      >
+        Name is required
+      </span>
+    </p>
+    <p>
+      <input placeholder="Let us know how to contact you back.." formControlName="email" />
+      <span
+        class="error-message"
+        *ngIf="contactForm.get('email')?.invalid && (contactForm.get('email')?.dirty || contactForm.get('email')?.touched)"
+      >
+        Email is required and should be in a valid format
+      </span>
+    </p>
+    <p>
+      <textarea placeholder="What would you like to tell us.." formControlName="message"></textarea>
+      <span
+        class="error-message"
+        *ngIf="contactForm.get('message')?.invalid && (contactForm.get('message')?.dirty || contactForm.get('message')?.touched)"
+      >
+        Message is required
+      </span>
+    </p>
+    <button type="submit" [disabled]="!contactForm.valid">Send Message</button>
+  </form>
+   -->

@@ -1,0 +1,118 @@
+  .profile-image img {
+    border-radius: 100%;
+    object-fit: cover;
+    object-position: center;
+    border: 3px solid #d0c8c8;
+  }
+  
+  .profile-image {
+    position: relative;
+    width: 120px;
+    margin: auto;
+  }
+  
+  .profile-image > button {
+    position: absolute;
+    bottom: 10px;
+    right: 0;
+  }
+  
+  .form-container {
+    display: block;
+    /* max-width: 600px;
+    min-width: 400px; */
+    width: 500px;
+    height: 80%;
+    margin-top: 20px;
+    margin-left: 35%;
+    margin-right: auto;
+    /* margin-bottom: 60px; */
+    background: #eceff1;
+    padding: 48px;
+    /* border-radius: 0px; */
+  }
+  
+  .form-container mat-form-field {
+    width: 100%;
+  }
+  
+  .center {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .margin-top {
+    margin-top: 16px;
+    margin-bottom: -10px;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  .btn-block {
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    color: #ffffff;
+    display: flex;
+    font-size: 16px;
+    justify-content: center;
+    padding: 1rem 1.75rem;
+    text-decoration: none;
+    width: 100%;
+    border: 0;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    background-color: #75b2e9;
+    border-color: #75b2e9;
+    text-align: center;
+
+  }
+  
+  .btn-block:hover {
+    color: #fff;
+    background-color: #121b46;
+    border-color: #121b46;
+  }
+  
+  @media (max-width: 480px) {
+    .profile-image {
+      width: 60px;
+    }
+  
+    .form-container {
+      width: 50%;
+      max-width: 300px;
+      margin-top: 60px;
+      padding: 16px;
+      border-radius: 4px;
+    }
+  
+    .btn-block {
+      font-size: 12px;
+      padding: 0.5rem 1rem;
+    }
+  }
+  
+  @media screen and (max-width: 900px) and (min-width: 300px) {
+  
+    .form-container {
+      display: block;
+      max-width: 400px;
+      min-width: 200px;
+      /* width: 300px; */
+      height: 80%;
+      margin-top: 20px;
+      margin-left: 25%;
+      margin-right:auto;
+      /* margin-bottom: 60px; */
+      background: #eceff1;
+      padding: 48px;
+      /* border-radius: 0px; */
+    }
+    
+    .form-container mat-form-field {
+      width: 100%;
+    }
+  }
