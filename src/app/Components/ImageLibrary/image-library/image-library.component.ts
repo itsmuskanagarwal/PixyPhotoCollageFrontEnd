@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { HttpEventType } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { FileUploadService } from 'src/app/Services/file-upload.service';
-import { user } from 'src/app/Models/user';
 
 interface MyFile extends File {
   url: string | ArrayBuffer | null;
@@ -23,6 +22,7 @@ export class ImageLibraryComponent {
   imgList: string[] = [];
   selectedFiles: any[] = [];
   myFile: MyFile = {} as MyFile;
+  uploadedImages : any[] =[];
 
   constructor(private fileService: FileUploadService) {}
 
@@ -34,6 +34,18 @@ export class ImageLibraryComponent {
     }
 
     console.log(this.user);
+
+    this.fileService.getUploadedImages().subscribe((res)=>{
+      if(res){
+        console.log(res)
+        this.uploadedImages =[]
+        this.uploadedImages = res
+         console.log(this.uploadedImages)
+      }
+    },
+    (error)=>{
+      console.log(error)
+    })
   }
 
   onSelect(event: any) {
@@ -85,26 +97,34 @@ export class ImageLibraryComponent {
     for (let i = 0; i < this.files.length; i++) {
       const file = this.files[i];
       console.log('file: ' + file);
-
+      
       formData.append('images', file, file.name);
       console.log('formdata: ' + formData);
     }
 
-    this.fileService.uploadImages(formData).subscribe(
+    console.log(formData)
+    
+    console.log(this.user.name);
+    console.log(this.user._id);
+    console.log(this.files);
+
+    this.fileService.uploadImages(this.user._id,formData).subscribe(
       (response) => {
         console.log('Sucessfully added in File system ' + response);
+        this.selectedFiles = []
 
-        console.log(this.user.email);
-        console.log(this.files);
-
-        this.fileService.addImages(this.user.email, this.files).subscribe(
-          (response) => {
-            console.log('Sucessfully added in DB' + response);
-          },
-          (error) => {
-            console.log('Error uploading images In DB: ', error);
+        this.fileService.getUploadedImages().subscribe((res)=>{
+          if(res){
+            console.log(res)
+            this.uploadedImages =[]
+            this.uploadedImages = res
+             console.log(this.uploadedImages)
           }
-        );
+        },
+        (error)=>{
+          console.log(error)
+        })
+
       },
       (error) => {
         console.log('Error uploading images in File system: ', error);

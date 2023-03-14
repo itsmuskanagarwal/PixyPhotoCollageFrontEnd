@@ -22,7 +22,6 @@ export class ProfileComponent {
   getId: any;
   updateForm: FormGroup | any;
   public imageUrl: string = '';
-  isClicked: boolean = false;
   user : any;
 
   img = [
@@ -86,17 +85,6 @@ export class ProfileComponent {
     return password === confirmPassword ? null : { mismatch: true };
   }
 
-  selectedAvatar(imageUrl: string) {
-    console.log('selectAvatar body entered');
-    // this.imageUrl = imageUrl;
-    this.isClicked = false;
-    // console.log(this.isClicked);
-    // this.crudService
-    //   .updateAvatar(this.storage.data.email, this.imageUrl)
-    //   .subscribe((res) => {
-    //     console.log(res);
-    //   });
-  }
 
   save(data: any) {
     if (this.updateForm.valid) {

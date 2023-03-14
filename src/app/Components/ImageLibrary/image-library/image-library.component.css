@@ -161,6 +161,12 @@
   }
   
   
+h1{
+  margin-left: 680px;
+  margin-top: 100px;
+  font-size: 20px;
+  color: gray;
+}
 
 /* Styles for screens between 300px and 900px wide */
 @media screen and (max-width: 900px) and (min-width: 300px) {
@@ -207,7 +213,12 @@
         overflow: auto; /* Enable scrolling */
       }
 
-      
+      h1{
+        margin-left: 250px;
+        margin-top: 100px;
+        font-size: 20px;
+        color: gray;
+      }
   }
   
   

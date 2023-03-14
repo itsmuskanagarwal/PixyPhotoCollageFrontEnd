@@ -21,9 +21,9 @@ export class FileUploadService {
   httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
 
   //Get all the uploaded images
-getUploadedImages(data: any): Observable<any> {
+getUploadedImages(): Observable<any> {
   return this.httpClient
-    .get(`${this.REST_API}/uploaded-images`, { params: { email: data.email }, responseType: 'json' })
+    .get(`${this.REST_API}/uploaded-images`)
     .pipe(
       catchError((error) => {
         console.error('Error getting uploaded images', error);
@@ -45,30 +45,31 @@ addFinalProject(data: any): Observable<any> {
 }
 
 //upload images in systemt
-uploadImages(data: any): Observable<any> {
+uploadImages(userId: string, data: any): Observable<any> {
   const headers = new HttpHeaders();
+
   return this.httpClient
-    .post(`${this.REST_API}/upload-images`, data,  { headers, responseType: 'json' })
+    .post(`${this.REST_API}/upload-images/${userId}`, data,  { headers, responseType: 'json' })
     .pipe(
       catchError((error) => {
-        console.error('Error adding final project', error);
-        return throwError(() => new Error('Error adding final project'));
+        console.error('Error uploading images', error);
+        return throwError(() => new Error('Error uploading images '));
       })
     );
 }
 
-//add images in DB
-addImages(email: string, data:any): Observable<any> {
-  const headers = new HttpHeaders();
-  const body = {email, data}
-  return this.httpClient
-    .post(`${this.REST_API}/add-images`, body,  { headers, responseType: 'json' })
-    .pipe(
-      catchError((error) => {
-        console.error('Error adding final project', error);
-        return throwError(() => new Error('Error adding final project'));
-      })
-    );
-}
+// // add images in DB
+// addImages(email: string, files:any): Observable<any> {
+//   const headers = new HttpHeaders();
+//   const body = {email, files}
+//   return this.httpClient
+//     .post(`${this.REST_API}/add-images`, body,  { headers, responseType: 'json' })
+//     .pipe(
+//       catchError((error) => {
+//         console.error('Error adding final project', error);
+//         return throwError(() => new Error('Error adding final project'));
+//       })
+//     );
+// }
 
 }

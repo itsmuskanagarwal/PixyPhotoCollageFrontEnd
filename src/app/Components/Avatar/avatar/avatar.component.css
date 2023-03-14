@@ -87,3 +87,20 @@
     background-color: #121b46;
     border-color: #121b46;
   }
+
+  .preview-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.preview-img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+    align-self: center;
+}
+
+.preview-img:hover {
+    cursor: move;
+}

@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { AuthService } from 'src/app/Services/auth.service';
 import { MatDialogRef } from '@angular/material/dialog';
 
+interface MyFile extends File {
+  url: string | ArrayBuffer | null;
+}
+
 @Component({
   selector: 'app-avatar',
   templateUrl: './avatar.component.html',
@@ -11,6 +15,10 @@ export class AvatarComponent {
 
   files: File[] = [];
   imageSelected : boolean = false;
+  selectedimg : string ="";
+  filestemp: File[] = [];
+  myFile: MyFile = {} as MyFile;
+
 
   constructor(
     private authService : AuthService,
@@ -23,7 +31,11 @@ export class AvatarComponent {
       console.log(file)
       this.files.push(file);
 
-      
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.selectedimg = e?.target?.result as string;
+      }
+      reader.readAsDataURL(file);
     }
     this.imageSelected = true
     console.log(files)

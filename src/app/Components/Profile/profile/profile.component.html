@@ -16,14 +16,6 @@
       </button>
     </div>
   
-    <div *ngIf="isClicked" class="avatar-container">
-      <div *ngFor="let imgUrl of img">
-        <div (click)="selectedAvatar(imgUrl)">
-          <img [src]="imgUrl" class="avatar-container-item" />
-        </div>
-      </div>
-    </div>
-  <br>
     <form [formGroup]="updateForm" (ngSubmit)="save(updateForm.value)">
       <mat-form-field>
         <input matInput formControlName="name" placeholder="Name" />

@@ -1,21 +1,21 @@
 <!-- Image Upload Section -->
 <div class="imgupload">
-<mat-expansion-panel [expanded]="true">
+  <mat-expansion-panel [expanded]="true">
     <mat-expansion-panel-header>
-      <mat-panel-title>
-        Upload Image
-      </mat-panel-title>
+      <mat-panel-title> Upload Image </mat-panel-title>
     </mat-expansion-panel-header>
-    
+
     <div class="image-upload">
       <ng-container *ngIf="!selectedFiles.length">
-        <ngx-dropzone class="mx-1" (change)="onSelect($event)" (remove)="onRemove($event)">
+        <ngx-dropzone
+          class="mx-1"
+          (change)="onSelect($event)"
+          (remove)="onRemove($event)"
+        >
           <ngx-dropzone-label>
-              Drag & Drop files here<br>
-              <span style="font-size: 12px">or</span><br>
-              <button class="btn2" >
-                Browse Files
-              </button>
+            Drag & Drop files here<br />
+            <span style="font-size: 12px">or</span><br />
+            <button class="btn2">Browse Files</button>
           </ngx-dropzone-label>
         </ngx-dropzone>
       </ng-container>
@@ -31,13 +31,20 @@
         </div>
       </ng-container>
 
-        <div class="row pl-1 m-1 text-center">
-            <div class="col-md-12 text-center">
-                <button mat-raised-button id="upload-button" class="btn " (click)="uploadFiles()">Upload Images</button>
-            </div>
+      <div class="row pl-1 m-1 text-center">
+        <div class="col-md-12 text-center">
+          <button
+            mat-raised-button
+            id="upload-button"
+            class="btn"
+            (click)="uploadFiles()"
+          >
+            Upload Images
+          </button>
         </div>
+      </div>
     </div>
-</mat-expansion-panel>
+  </mat-expansion-panel>
 </div>
 
 <!-- <div class="img-grid">
@@ -46,11 +53,17 @@
     </div>
   </div> -->
 
-  <!-- <div class="img-container">
-    <div class="img-grid">
-      <div class="img-item" *ngFor="let f of files">
-        <div class="img-preview" [style.background-image]="'url(' + f + ')'"></div>
-      </div>
+<div class="img-container" *ngIf="uploadedImages.length">
+  <div class="img-grid">
+    <div class="img-item" *ngFor="let image of uploadedImages">
+      <img
+        class="img-preview"
+        src="http://localhost:3000/public/images/{{ image }}"
+      />
     </div>
-  </div> -->
-  
+  </div>
+</div>
+
+<div class="img-container" *ngIf="uploadedImages.length == 0 ">
+  <h1>There are no images into your library.</h1>
+</div>
