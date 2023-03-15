@@ -4,9 +4,10 @@
     <span class="icon">&#x1F43E;</span>
   </div>
 
+
   <div class="container">
-    <div *ngIf="projects > 0">
-      <div class="box" *ngFor="let img of images">
+    <div *ngIf="projects.length > 0">
+      <div class="box" *ngFor="let img of projects">
         <div class=" img-wrapper">
           <img class="finalimg" [src]="img">         
         </div>
@@ -16,6 +17,10 @@
         <button class="btn delete-btn">Delete</button>
       </div>
       </div>
+    </div>
+
+    <div  *ngIf="projects.length == 0 ">
+      <h1>There are no images into your library.</h1>
     </div>
   </div>
 </body>

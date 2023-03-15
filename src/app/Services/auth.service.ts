@@ -96,9 +96,10 @@ findUserAvatar(data: any): Observable<any> {
 }
 
 //Update profile picture
-updateAvatar(data: any): Observable<any> {
+updateAvatar(userId: string, data: any): Observable<any> {
+  const headers = new HttpHeaders();
   return this.httpClient
-    .put(`${this.REST_API}/update-avatar`, data, { responseType: 'json' })
+    .put(`${this.REST_API}/update-avatar/${userId}`, data, { headers, responseType: 'json' })
     .pipe(
       catchError((error) => {
         console.error('Error updating avatar', error);

@@ -75,6 +75,8 @@
     background-color: #121b46;
     border-color: #121b46;
   }
+
+  
   
   @media (max-width: 480px) {
     .profile-image {

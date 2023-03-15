@@ -44,6 +44,7 @@ ngDoCheck(){
 
 logout(){
   localStorage.removeItem("isLoggedIn")
+  localStorage.removeItem("userData")
   this.router.navigateByUrl('/landing');
   
 }

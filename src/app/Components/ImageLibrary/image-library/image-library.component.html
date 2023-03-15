@@ -23,7 +23,7 @@
       <ng-container *ngIf="selectedFiles.length">
         <div class="selected-images-container">
           <div class="selected-image" *ngFor="let file of selectedFiles">
-            <!-- <img [src]="file.url" alt="{{file.name}}"> -->
+            <img [src]="file.url" width="80px" height="80px">
             <div class="remove-image-btn" (click)="removeSelectedFile(file)">
               <mat-icon>clear</mat-icon>
             </div>
@@ -59,11 +59,12 @@
       <img
         class="img-preview"
         src="http://localhost:3000/public/images/{{ image }}"
-      />
+      /><br>
+      <button class="btn delete-btn" (click)="deleteUploadedImage(image)">Delete</button>
     </div>
   </div>
 </div>
 
 <div class="img-container" *ngIf="uploadedImages.length == 0 ">
-  <h1>There are no images into your library.</h1>
+  <h1>There are no projects.</h1>
 </div>

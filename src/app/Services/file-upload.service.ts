@@ -21,13 +21,27 @@ export class FileUploadService {
   httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
 
   //Get all the uploaded images
-getUploadedImages(): Observable<any> {
+getUploadedImages(userId : string): Observable<any> {
+  const headers = new HttpHeaders();
+  const params = new HttpParams().set('userId', userId);
   return this.httpClient
-    .get(`${this.REST_API}/uploaded-images`)
+    .get(`${this.REST_API}/uploaded-images`, { headers, params, responseType: 'json' })
     .pipe(
       catchError((error) => {
         console.error('Error getting uploaded images', error);
         return throwError(() => new Error('Error getting uploaded images'));
+      })
+    );
+}
+
+ //Get all the uploaded images
+ getProjects(): Observable<any> {
+  return this.httpClient
+    .get(`${this.REST_API}/get-projects`)
+    .pipe(
+      catchError((error) => {
+        console.error('Error getting project images', error);
+        return throwError(() => new Error('Error getting project images'));
       })
     );
 }
@@ -58,18 +72,18 @@ uploadImages(userId: string, data: any): Observable<any> {
     );
 }
 
-// // add images in DB
-// addImages(email: string, files:any): Observable<any> {
-//   const headers = new HttpHeaders();
-//   const body = {email, files}
-//   return this.httpClient
-//     .post(`${this.REST_API}/add-images`, body,  { headers, responseType: 'json' })
-//     .pipe(
-//       catchError((error) => {
-//         console.error('Error adding final project', error);
-//         return throwError(() => new Error('Error adding final project'));
-//       })
-//     );
-// }
+//delete uploaded images
+deleteUploadedImages(filename : string): Observable<any> {
+  console.log(typeof filename)
+  return this.httpClient
+    .post(`${this.REST_API}/delete-uploaded-images`, { filename }, { responseType: 'text' })
+    .pipe(
+      catchError((error) => {
+        console.error('Error deleting images', error);
+        return throwError(() => new Error('Error deleting images'));
+      })
+    );
+}
+
 
 }

@@ -35,9 +35,9 @@ export class ImageLibraryComponent {
 
     console.log(this.user);
 
-    this.fileService.getUploadedImages().subscribe((res)=>{
+    this.fileService.getUploadedImages(this.user._id).subscribe((res)=>{
       if(res){
-        console.log(res)
+        console.log(typeof res)
         this.uploadedImages =[]
         this.uploadedImages = res
          console.log(this.uploadedImages)
@@ -49,7 +49,7 @@ export class ImageLibraryComponent {
   }
 
   onSelect(event: any) {
-    this.imgList = [];
+    this.files = [];
 
     const files: File[] = event.addedFiles;
     this.selectedFiles = this.selectedFiles.concat(event.addedFiles);
@@ -62,12 +62,11 @@ export class ImageLibraryComponent {
       reader.readAsDataURL(file);
       reader.onload = (e) => {
         const myFile: MyFile = file as MyFile;
-        // myFile.url = e.target?.result;
+        myFile.url = e.target?.result ?? null;
         this.filestemp.push(myFile);
+
       }
-
     }
-
     console.log(files);
     console.log(this.imgList);
   }
@@ -87,6 +86,30 @@ export class ImageLibraryComponent {
     this.selectedFiles = this.selectedFiles.filter(
       (selectedFile: any) => selectedFile !== file
     );
+  }
+
+  deleteUploadedImage(filename:string){
+    console.log(filename)
+
+    this.fileService.deleteUploadedImages(filename).subscribe((res)=>
+    {
+      console.log("deleted sucessfully")
+
+      this.fileService.getUploadedImages(this.user._id).subscribe((res)=>{
+        if(res){
+          console.log(res)
+          this.uploadedImages =[]
+          this.uploadedImages = res
+           console.log(this.uploadedImages)
+        }
+      },
+      (error)=>{
+        console.log(error)
+      })
+
+    },(error)=>{
+      console.log(error)
+    })
   }
 
   uploadFiles() {
@@ -113,7 +136,7 @@ export class ImageLibraryComponent {
         console.log('Sucessfully added in File system ' + response);
         this.selectedFiles = []
 
-        this.fileService.getUploadedImages().subscribe((res)=>{
+        this.fileService.getUploadedImages(this.user._id).subscribe((res)=>{
           if(res){
             console.log(res)
             this.uploadedImages =[]

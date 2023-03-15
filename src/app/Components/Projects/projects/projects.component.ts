@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FileUploadService } from 'src/app/Services/file-upload.service';
 
 @Component({
   selector: 'app-projects',
@@ -7,17 +8,24 @@ import { Component } from '@angular/core';
 })
 export class ProjectsComponent {
 
-  images = [
-    "./assets/user1.png",
-    "./assets/contact.png",
-    "./assets/logo.png",
-    "./assets/signupbg.jpg",
-    "./assets/user1.png",
-    "./assets/contact.png",
-    "./assets/logo.png",
-    "./assets/signupbg.jpg"
-  ];
+  projects : any[] =[]
 
-  projects = 1;
+  constructor(
+    private fileService : FileUploadService
+  ){}
+
+  ngOnInit(){
+    
+  this.fileService.getProjects().subscribe((res)=>{
+    if(res){
+      console.log(res)
+      
+    }
+  },
+  (error)=>{
+    console.log(error)
+  })
+  }
+
 
 }

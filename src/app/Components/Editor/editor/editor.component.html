@@ -3,23 +3,28 @@
     <!-- <h2><span>Editing Tab</span></h2>
     <hr> -->
     <div class="dropdown">
-        <button class="dropdown-toggle" >Select Count</button>
-        <div class="dropdown-content">
-            <a href="#">2 Image Layout</a>
-            <a href="#">4 Image Layout</a>
-            <a href="#">6 Image Layout</a>
-            <a href="#">8 Image Layout</a>
-            <a href="#">16 Image Layout</a>
+        <button class="dropdown-toggle" (click)="toggleDropdown()" >Select Count</button>
+        <div class="dropdown-content"  *ngIf="showDropdown">
+            <a (click)="count(2)">2 Image Layout</a>
+            <a (click)="count(4)">4 Image Layout</a>
+            <a (click)="count(9)">9 Image Layout</a>
+            <a (click)="count(16)">16 Image Layout</a>
+            <!-- <a (click)="count(2)">16 Image Layout</a> -->
         </div>
         
         <div class = "smallcontainerdrop"> 
-            <div class="box" *ngFor="let img of images">
-                <img class="uploadimg" [src] = "img">
+          <div *ngIf = "layouts.length">
+            <div class="box" *ngFor="let layout of layouts">
+                <img class="uploadimg" [src] = "layout">
+            </div>
+            </div>
+            <div *ngIf = "!layouts.length">
+              <h2>No layout seletced.</h2>
             </div>
         </div>
     </div>
     
-    <button class="upload-btn">Add Images</button>
+    <button class="upload-btn" (click)="addImages()">Add Images</button>
     <div class = "smallcontainer"> 
     <div class="box" *ngFor="let img of images">
         <img class="uploadimg" [src] = "img">

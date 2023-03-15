@@ -24,13 +24,6 @@ export class ProfileComponent {
   public imageUrl: string = '';
   user : any;
 
-  img = [
-    '../assets/img1.jpg',
-    '../assets/img2.jpg',
-    '../assets/img3.jpg',
-    '../assets/img4.jpg',
-    '../assets/img5.jpg',
-  ];
 
   constructor(
     private _snackBar: MatSnackBar,

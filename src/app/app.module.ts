@@ -29,6 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
+import { SelectImageComponent } from './Components/SelectImage/select-image/select-image.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     ContactComponent,
     ProjectsComponent,
     ImageLibraryComponent,
-    AvatarComponent
+    AvatarComponent,
+    SelectImageComponent
   ],
   imports: [
     BrowserModule,
