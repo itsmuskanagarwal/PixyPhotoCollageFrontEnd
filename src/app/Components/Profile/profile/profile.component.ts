@@ -50,6 +50,13 @@ export class ProfileComponent {
     if (userData !== null) {
       this.user = JSON.parse(localStorage.getItem('userData') as string);
       // this.currentUser = this.user;
+
+      this.authService.findUserAvatar(this.user._id).subscribe((res)=>{
+        console.log(res)
+        this.imageUrl = res.toString()
+        console.log(this.imageUrl)
+        console.log(this.user._id)
+      })
     }
     
     console.log(this.user)
@@ -59,7 +66,7 @@ export class ProfileComponent {
       email: this.user.email,
     });
 
-    }
+  }
 
   upload() {
     // this.isClicked = true;
@@ -69,6 +76,11 @@ export class ProfileComponent {
   
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      this.authService.findUserAvatar(this.user._id).subscribe((res)=>{
+        console.log(res)
+        this.imageUrl = res.toString()
+        console.log(this.imageUrl)
+      })
     });
   }
 
@@ -80,11 +92,22 @@ export class ProfileComponent {
 
 
   save(data: any) {
+    console.log(this.updateForm.valid)
     if (this.updateForm.valid) {
+
+      console.log("in save button")
 
       this.authService.updateUser(data).subscribe((response)=>{
 
-        localStorage.setItem("userData",  JSON.stringify(data))
+        console.log(response)
+        localStorage.setItem("userData",  JSON.stringify(response))
+
+        this.authService.findUserAvatar(this.user._id).subscribe((res)=>{
+          console.log(res)
+          this.imageUrl = res.toString()
+          console.log(this.imageUrl)
+        })
+
         this._snackBar.open(
           'Hello ' + data.display + ', Details Updated successfully!!',
           'OK',

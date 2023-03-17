@@ -79,7 +79,7 @@ export class SignupComponent {
           console.log('User added successfully', response);
           // reset form fields
 
-          if (response.hasOwnProperty("Success")) {
+          if (response.hasOwnProperty("success")) {
             // Success key exists in response object
             console.log("Registration successful!");
             this._snackBar.open('You are sucessfully regist', 'close', {

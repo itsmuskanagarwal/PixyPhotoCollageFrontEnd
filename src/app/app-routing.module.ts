@@ -22,10 +22,10 @@ const routes: Routes = [
   { path: 'landing', component: LandingComponent,canActivate : [AuthdeactivateGuard]},
   { path: 'contact', component: ContactComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'editor', component: EditorComponent},
-  { path: 'projects', component: ProjectsComponent },
-  { path: 'imglibrary', component: ImageLibraryComponent }
+  { path: 'profile', component: ProfileComponent, canActivate : [AuthactivateGuard] },
+  { path: 'editor', component: EditorComponent,  canActivate : [AuthactivateGuard]},
+  { path: 'projects', component: ProjectsComponent,  canActivate : [AuthactivateGuard] },
+  { path: 'imglibrary', component: ImageLibraryComponent,  canActivate : [AuthactivateGuard] }
 ];
 
 @NgModule({

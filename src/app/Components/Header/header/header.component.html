@@ -2,7 +2,8 @@
 <nav class="menu" tabindex="0">
 	<!-- <div class="smartphone-menu-trigger"></div> -->
   <header class="avatar">
-		<img src={{user.profilePicture}} />
+		<img *ngIf="!imageUrl" src={{user.profilePicture}} />
+    <img *ngIf="imageUrl !== ''"  src="http://localhost:3000/public/profile/{{imageUrl}}"  />
     <h2>{{user.name}}</h2>
     <h6>{{user.email}}</h6>
   </header>

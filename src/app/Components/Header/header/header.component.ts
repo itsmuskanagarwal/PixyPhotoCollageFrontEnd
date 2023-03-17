@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/Services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -10,8 +11,11 @@ export class HeaderComponent implements OnInit {
 
 isLoggedIn : boolean = false;
 user : any;
+public imageUrl: string = '';
 
-constructor(private router : Router) {
+constructor(
+  private router : Router,
+  private authService : AuthService) {
   
 }
 
@@ -21,6 +25,13 @@ ngOnInit(){
   if (userData !== null) {
     this.user = JSON.parse(localStorage.getItem('userData') as string);
     // this.currentUser = this.user;
+
+    this.authService.findUserAvatar(this.user._id).subscribe((res)=>{
+      console.log(res)
+      this.imageUrl = res.toString()
+      console.log(this.imageUrl)
+      console.log(this.user._id)
+    })
   }
 
 }

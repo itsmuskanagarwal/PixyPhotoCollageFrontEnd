@@ -13,6 +13,9 @@ import {
 })
 export class FileUploadService {
 
+  selectedImages : any[] =[];
+  count = 0;
+
   constructor(private httpClient: HttpClient) { }
 
   REST_API = 'http://localhost:3000';

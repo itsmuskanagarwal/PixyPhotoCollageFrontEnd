@@ -15,6 +15,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProjectsComponent } from './Components/Projects/projects/projects.component';
 import { ImageLibraryComponent } from './Components/ImageLibrary/image-library/image-library.component';
 import { AvatarComponent } from './Components/Avatar/avatar/avatar.component';
+import { SelectImageComponent } from './Components/SelectImage/select-image/select-image.component';
 
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -29,7 +30,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
-import { SelectImageComponent } from './Components/SelectImage/select-image/select-image.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,9 @@ import { SelectImageComponent } from './Components/SelectImage/select-image/sele
     HttpClientModule,
     MatCardModule,
     MatProgressSpinnerModule,
-    MatDialogModule
+    MatDialogModule,
+    MatFormFieldModule,
+    ColorPickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

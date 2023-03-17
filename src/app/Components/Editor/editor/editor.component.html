@@ -3,56 +3,75 @@
     <!-- <h2><span>Editing Tab</span></h2>
     <hr> -->
     <div class="dropdown">
-        <button class="dropdown-toggle" (click)="toggleDropdown()" >Select Count</button>
-        <div class="dropdown-content"  *ngIf="showDropdown">
-            <a (click)="count(2)">2 Image Layout</a>
-            <a (click)="count(4)">4 Image Layout</a>
-            <a (click)="count(9)">9 Image Layout</a>
-            <a (click)="count(16)">16 Image Layout</a>
-            <!-- <a (click)="count(2)">16 Image Layout</a> -->
+      <button class="dropdown-toggle" (click)="toggleDropdown()">
+        Select Count
+      </button>
+      <div class="dropdown-content" *ngIf="showDropdown">
+        <a (click)="count(2)">2 Image Layout</a>
+        <a (click)="count(4)">4 Image Layout</a>
+        <a (click)="count(9)">9 Image Layout</a>
+        <a (click)="count(16)">16 Image Layout</a>
+        <!-- <a (click)="count(2)">16 Image Layout</a> -->
+      </div>
+
+      <div class="smallcontainerdrop">
+        <div *ngIf="layouts.length">
+          <div class="box" *ngFor="let layout of layouts">
+            <img class="uploadimg" [src]="layout" />
+          </div>
         </div>
-        
-        <div class = "smallcontainerdrop"> 
-          <div *ngIf = "layouts.length">
-            <div class="box" *ngFor="let layout of layouts">
-                <img class="uploadimg" [src] = "layout">
-            </div>
-            </div>
-            <div *ngIf = "!layouts.length">
-              <h2>No layout seletced.</h2>
-            </div>
+        <div *ngIf="!layouts.length">
+          <h2>No layout seletced.</h2>
         </div>
+      </div>
     </div>
-    
-    <button class="upload-btn" (click)="addImages()">Add Images</button>
-    <div class = "smallcontainer"> 
-    <div class="box" *ngFor="let img of images">
-        <img class="uploadimg" [src] = "img">
-    </div>
+
+    <button
+      class="upload-btn"
+      (click)="addImages()"
+      [disabled]="!layouts.length"
+    >
+      Add Images
+    </button>
+    <div class="smallcontainer">
+      <div *ngIf="images.length">
+        <div class="box" *ngFor="let img of images">
+          <img
+            class="uploadimg"
+            src="http://localhost:3000/public/images/{{ img }}"
+          />
+        </div>
+      </div>
+      <div *ngIf="!images.length">
+        <h3>No image selected</h3>
+      </div>
     </div>
 
     <div class="label-dropdown">
       <!-- <label class="label">Border:</label> -->
       <div class="border-slider">
         <label class="border-slider-label">Border:</label>
-        <input type="range" min="0" max="10" value="0" class="border-slider-input">
+        <input
+          type="range"
+          min="0"
+          max="10"
+          value="0"
+          class="border-slider-input"
+          #borderSlider
+        />
       </div>
+
       <!-- <label class="label">Color:</label> -->
       <div class="color-dropdown">
         <label class="color-dropdown-label">Colour:</label>
         <div class="color-dropdown-squares">
-          <div class="color-square" style="background-color: #DFFFD8;"></div>
-          <div class="color-square" style="background-color: #F7C8E0;"></div>
-          <div class="color-square" style="background-color: #FD8A8A
-          ;"></div>
-          <div class="color-square" style="background-color: #A8D1D1;"></div>
-          <div class="color-square" style="background-color: #95BDFF;"></div>
-          <div class="color-square" style="background-color: #9EA1D4;"></div>
-          </div>
-        </div>
-        </div>
-    <br>
-    <button class="create-btn">Create Collage</button>
+          <input class="color-input" [style.background]=" color" [colorPicker]="color" (colorPickerChange)="onColorChange($event)"/>      
+        </div>      
+      </div>
+    </div>
+    <br />
+    <mat-error *ngIf="msg">{{msg}}</mat-error>
+    <button class="create-btn" (click)="createCollage()">Create Collage</button>
     <button class="reset-btn">Reset</button>
   </div>
 
@@ -60,7 +79,7 @@
 
   <div class="main-canvas">
     <div class="sub-canvas">
-      <img class="collage" src="./assets/temp.jpeg">
+      <img class="collage" src="./assets/temp.jpeg" />
     </div>
     <button class="btn save-btn">Save</button>
     <button class="btn send-btn">Send</button>
@@ -69,14 +88,14 @@
 
   <div class="side-container">
     <h1>Community</h1>
-    <hr>
+    <hr />
     <div *ngFor="let user of users">
       <label class="checkbox-container">
-        <input type="checkbox">
-        {{user.name}}
+        <input type="checkbox" />
+        {{ user.name }}
         <span class="checkmark"></span>
       </label>
     </div>
-    <button class="btn send-btn-side"> Send </button>
+    <button class="btn send-btn-side">Send</button>
   </div>
 </body>

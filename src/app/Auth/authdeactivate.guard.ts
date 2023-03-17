@@ -15,7 +15,7 @@ export class AuthdeactivateGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
       if(localStorage.getItem("isLoggedIn")){
-        this.router.navigate(['/project']);
+        this.router.navigate(['/editor']);
         return false
       }
       else{

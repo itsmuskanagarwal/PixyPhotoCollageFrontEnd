@@ -142,6 +142,7 @@ export class ImageLibraryComponent {
             this.uploadedImages =[]
             this.uploadedImages = res
              console.log(this.uploadedImages)
+             this.files = [];
           }
         },
         (error)=>{

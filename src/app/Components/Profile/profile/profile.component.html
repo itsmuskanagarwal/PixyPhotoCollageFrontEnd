@@ -3,13 +3,13 @@
   
     <div  class="profile-image">
       <img
-        
+      *ngIf="imageUrl == ''"
         width="120"
         height="120"
         src={{user.profilePicture}}
       />
   
-      <!-- <img *ngIf="imageUrl !== ''" [src]="imageUrl" width="120" height="120" /> -->
+      <img *ngIf="imageUrl !== ''"  src="http://localhost:3000/public/profile/{{imageUrl}}" width="120" height="120" />
   
       <button mat-mini-fab name="profile_picture" (click)="upload()">
         <mat-icon>edit</mat-icon>

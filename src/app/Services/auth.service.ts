@@ -84,9 +84,9 @@ addQuery(data: any): Observable<any> {
 
 
 //Profile picture
-findUserAvatar(data: any): Observable<any> {
+findUserAvatar(userId: string): Observable<any> {
   return this.httpClient
-    .get(`${this.REST_API}/find-user-avatar`, { params: { email: data.email }, responseType: 'json' })
+    .get(`${this.REST_API}/find-user-avatar`, { params: { userId }, responseType: 'json' })
     .pipe(
       catchError((error) => {
         console.error('Error finding user avatar', error);
@@ -95,11 +95,15 @@ findUserAvatar(data: any): Observable<any> {
     );
 }
 
+
 //Update profile picture
 updateAvatar(userId: string, data: any): Observable<any> {
+
+  const params = new HttpParams().set('userId', userId);
   const headers = new HttpHeaders();
+
   return this.httpClient
-    .put(`${this.REST_API}/update-avatar/${userId}`, data, { headers, responseType: 'json' })
+    .put(`${this.REST_API}/update-avatar/${userId}`, data, { headers,params, responseType: 'json' })
     .pipe(
       catchError((error) => {
         console.error('Error updating avatar', error);
