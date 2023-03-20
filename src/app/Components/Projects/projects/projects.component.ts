@@ -9,9 +9,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./projects.component.css'],
 })
 export class ProjectsComponent {
-
   projects: any[] = [];
-  user : any;
+  user: any;
 
   constructor(private fileService: FileUploadService) {}
 
@@ -25,11 +24,39 @@ export class ProjectsComponent {
       (res) => {
         if (res) {
           console.log(res);
-          console.log(typeof res)
-        this.projects =[]
-        this.projects = res
-         console.log(this.projects)
+          console.log(typeof res);
+          this.projects = [];
+          this.projects = res;
+          console.log(this.projects);
         }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  } 
+  
+
+  deleteProject(filename: any) {
+    console.log(filename);
+
+    this.fileService.deleteProject(filename).subscribe(
+      (res) => {
+        console.log('deleted sucessfully');
+
+        this.fileService.getProjects(this.user._id).subscribe(
+          (res) => {
+            if (res) {
+              console.log(res);
+              this.projects = [];
+              this.projects = res;
+              console.log(this.projects);
+            }
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
       },
       (error) => {
         console.log(error);
@@ -37,51 +64,30 @@ export class ProjectsComponent {
     );
   }
 
-  downloadImage() {
-    const selectedImage = document.querySelector('.finalimg') as HTMLImageElement;
-    console.log(selectedImage)
-
-    if (selectedImage) {
-      console.log(selectedImage)
-      const link = document.createElement('a');
-      link.download = 'selected-image.png';
+  async downloadProject(imagePath: string) {
+    console.log("download function");
+    console.log(imagePath);
   
-      // Attach a listener to the anchor's load event
-      link.addEventListener('load', () => {
-        link.click();
-        document.body.removeChild(link);
-      });
+    const response = await fetch(`http://localhost:3000/public/projects/${imagePath}`);
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
   
-      // Trigger the load event by setting the anchor's href attribute
-      link.href = selectedImage.src;
+    const link = document.createElement('a');
+    const fileName = imagePath.substring(imagePath.lastIndexOf('/') + 1);
+    link.download = fileName;
+    link.href = url;
   
-      // Append the anchor to the document
-      document.body.appendChild(link);
-    }
-  }
+    console.log(link);
+    console.log(fileName);
   
-  deleteProject(filename:string){
-    console.log(filename)
-
-    this.fileService.deleteUploadedImages(filename).subscribe((res)=>
-    {
-      console.log("deleted sucessfully")
-
-      this.fileService.getUploadedImages(this.user._id).subscribe((res)=>{
-        if(res){
-          console.log(res)
-          this.projects =[]
-          this.projects = res
-           console.log(this.projects)
-        }
-      },
-      (error)=>{
-        console.log(error)
-      })
-
-    },(error)=>{
-      console.log(error)
-    })
+    link.addEventListener('load', () => {
+      URL.revokeObjectURL(url);
+      document.body.removeChild(link);
+    });
+  
+    document.body.appendChild(link);
+  
+    link.click();
   }
   
 }

@@ -71,12 +71,16 @@ export class EditorComponent {
         this.users = [];
 
         usersArray.forEach((user: any) => {
-          console.log(user.email, user.email);
+          console.log(user.email);
+          console.log(user);
 
-          if (user.email !== user.email) {
+          if (user.email !== this.user.email) {
             this.users.push(user);
           }
         });
+
+        console.log(this.users);
+
       },
       (error) => {
         console.log(error);

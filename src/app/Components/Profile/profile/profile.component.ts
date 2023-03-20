@@ -80,6 +80,7 @@ export class ProfileComponent {
         console.log(res)
         this.imageUrl = res.toString()
         console.log(this.imageUrl)
+        this.authService.profileUpdated = true
       })
     });
   }

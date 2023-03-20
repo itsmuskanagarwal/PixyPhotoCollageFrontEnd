@@ -9,14 +9,13 @@ import {
 } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FileUploadService {
-
-  selectedImages : any[] =[];
+  selectedImages: any[] = [];
   count = 0;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
   REST_API = 'http://localhost:3000';
 
@@ -24,73 +23,105 @@ export class FileUploadService {
   httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
 
   //Get all the uploaded images
-getUploadedImages(userId : string): Observable<any> {
-  const headers = new HttpHeaders();
-  const params = new HttpParams().set('userId', userId);
-  return this.httpClient
-    .get(`${this.REST_API}/uploaded-images`, { headers, params, responseType: 'json' })
-    .pipe(
-      catchError((error) => {
-        console.error('Error getting uploaded images', error);
-        return throwError(() => new Error('Error getting uploaded images'));
+  getUploadedImages(userId: string): Observable<any> {
+    const headers = new HttpHeaders();
+    const params = new HttpParams().set('userId', userId);
+    return this.httpClient
+      .get(`${this.REST_API}/uploaded-images`, {
+        headers,
+        params,
+        responseType: 'json',
       })
-    );
-}
+      .pipe(
+        catchError((error) => {
+          console.error('Error getting uploaded images', error);
+          return throwError(() => new Error('Error getting uploaded images'));
+        })
+      );
+  }
 
- //Get all the uploaded images
- getProjects(userId : string): Observable<any> {
-
-  const headers = new HttpHeaders();
-  const params = new HttpParams().set('userId', userId);
-  return this.httpClient
-    .get(`${this.REST_API}/get-projects`, { headers, params, responseType: 'json' })
-    .pipe(
-      catchError((error) => {
-        console.error('Error getting project images', error);
-        return throwError(() => new Error('Error getting project images'));
+  //Get all the uploaded images
+  getProjects(userId: string): Observable<any> {
+    const headers = new HttpHeaders();
+    const params = new HttpParams().set('userId', userId);
+    return this.httpClient
+      .get(`${this.REST_API}/get-projects`, {
+        headers,
+        params,
+        responseType: 'json',
       })
-    );
-}
+      .pipe(
+        catchError((error) => {
+          console.error('Error getting project images', error);
+          return throwError(() => new Error('Error getting project images'));
+        })
+      );
+  }
 
-//Add final project
-addFinalProject(userId: string, data: any): Observable<any> {
-  const headers = new HttpHeaders();
-  return this.httpClient
-    .post(`${this.REST_API}/add-final-project/${userId}`, data, {headers, responseType: 'json' })
-    .pipe(
-      catchError((error) => {
-        console.error('Error adding final project', error);
-        return throwError(() => new Error('Error adding final project'));
+  //Add final project
+  addFinalProject(userId: string, data: any): Observable<any> {
+    const headers = new HttpHeaders();
+    return this.httpClient
+      .post(`${this.REST_API}/add-final-project/${userId}`, data, {
+        headers,
+        responseType: 'json',
       })
-    );
-}
+      .pipe(
+        catchError((error) => {
+          console.error('Error adding final project', error);
+          return throwError(() => new Error('Error adding final project'));
+        })
+      );
+  }
 
-//upload images in systemt
-uploadImages(userId: string, data: any): Observable<any> {
-  const headers = new HttpHeaders();
+  //upload images in systemt
+  uploadImages(userId: string, data: any): Observable<any> {
+    const headers = new HttpHeaders();
 
-  return this.httpClient
-    .post(`${this.REST_API}/upload-images/${userId}`, data,  { headers, responseType: 'json' })
-    .pipe(
-      catchError((error) => {
-        console.error('Error uploading images', error);
-        return throwError(() => new Error('Error uploading images '));
+    return this.httpClient
+      .post(`${this.REST_API}/upload-images/${userId}`, data, {
+        headers,
+        responseType: 'json',
       })
-    );
-}
+      .pipe(
+        catchError((error) => {
+          console.error('Error uploading images', error);
+          return throwError(() => new Error('Error uploading images '));
+        })
+      );
+  }
 
-//delete uploaded images
-deleteUploadedImages(filename : string): Observable<any> {
-  console.log(typeof filename)
-  return this.httpClient
-    .post(`${this.REST_API}/delete-uploaded-images`, { filename }, { responseType: 'text' })
-    .pipe(
-      catchError((error) => {
-        console.error('Error deleting images', error);
-        return throwError(() => new Error('Error deleting images'));
-      })
-    );
-}
+  //delete uploaded images
+  deleteUploadedImages(filename: string): Observable<any> {
+    console.log(typeof filename);
+    return this.httpClient
+      .post(
+        `${this.REST_API}/delete-uploaded-images`,
+        { filename },
+        { responseType: 'text' }
+      )
+      .pipe(
+        catchError((error) => {
+          console.error('Error deleting images', error);
+          return throwError(() => new Error('Error deleting images'));
+        })
+      );
+  }
 
-
+   //delete project
+   deleteProject(filename: string): Observable<any> {
+    console.log(typeof filename);
+    return this.httpClient
+      .post(
+        `${this.REST_API}/delete-project`,
+        { filename },
+        { responseType: 'text' }
+      )
+      .pipe(
+        catchError((error) => {
+          console.error('Error deleting project', error);
+          return throwError(() => new Error('Error deleting project'));
+        })
+      );
+  }
 }

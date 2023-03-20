@@ -16,6 +16,7 @@ export class AuthService {
   constructor(private httpClient: HttpClient) { }
 
   REST_API = 'http://localhost:3000';
+  profileUpdated : boolean = false;
 
   // Http Header
   httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
