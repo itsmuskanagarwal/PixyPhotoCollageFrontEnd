@@ -24,7 +24,6 @@ export class ProfileComponent {
   public imageUrl: string = '';
   user : any;
 
-
   constructor(
     private _snackBar: MatSnackBar,
     public formBuilder: FormBuilder,
@@ -38,8 +37,8 @@ export class ProfileComponent {
     this.updateForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
       email: ['', [Validators.required, Validators.email, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
-      password: "",
-      confirmPassword: "",
+      password: ["", Validators.minLength(8)],
+      confirmPassword: ["", Validators.minLength(8)],
     }, { validators: this.passwordMatchValidator });
   }
 
@@ -110,7 +109,7 @@ export class ProfileComponent {
         })
 
         this._snackBar.open(
-          'Hello ' + data.display + ', Details Updated successfully!!',
+          'Hello ' + this.user.name + ', Details Updated successfully!!',
           'OK',
           {
             duration: 5000,

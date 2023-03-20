@@ -32,7 +32,7 @@
     </mat-form-field>
   
       <mat-form-field>
-        <input matInput formControlName="password" placeholder="Password" />
+        <input matInput formControlName="password" placeholder="Password" type=password />
         <mat-error *ngIf="updateForm.controls.password.invalid && (updateForm.controls.password.dirty || updateForm.controls.password.touched)">
             Password must be at least 8 characters long.
           </mat-error> 
@@ -40,8 +40,8 @@
   
   
       <mat-form-field>
-        <input matInput formControlName="confirmPassword" placeholder="Confirm Password" />
-        <mat-error *ngIf="updateForm.controls.confirmPassword.invalid && (updateForm.controls.confirmPassword.dirty || updateForm.controls.confirmPassword.touched)">
+        <input matInput formControlName="confirmPassword" placeholder="Confirm Password" type=password/>
+        <mat-error  *ngIf="updateForm.controls.password != updateForm.controls.confirmPassword">
             Passwords do not match.
           </mat-error> 
     </mat-form-field>
