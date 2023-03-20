@@ -9,12 +9,12 @@
     <div *ngIf="projects.length > 0">
       <div class="box" *ngFor="let img of projects">
         <div class=" img-wrapper">
-          <img class="finalimg" [src]="img">         
+          <img class="finalimg" src="http://localhost:3000/public/projects/{{ img }}">         
         </div>
         <div class="btn-wrapper">
-        <button class="btn save-btn" >Save</button>
-        <button class="btn send-btn" >Send</button>
-        <button class="btn delete-btn">Delete</button>
+          <button class="btn send-btn" >Send</button>
+          <button class="btn delete-btn">Delete</button>
+          <button class="btn download-btn" (click)="downloadImage()">Download</button>
       </div>
       </div>
     </div>

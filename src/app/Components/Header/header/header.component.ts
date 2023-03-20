@@ -45,6 +45,13 @@ ngDoCheck(){
     if (userData !== null) {
       this.user = JSON.parse(localStorage.getItem('userData') as string);
       // this.currentUser = this.user;
+
+      // this.authService.findUserAvatar(this.user._id).subscribe((res)=>{
+      //   console.log(res)
+      //   this.imageUrl = res.toString()
+      //   console.log(this.imageUrl)
+      //   console.log(this.user._id)
+      // })
     }
   }
   else{

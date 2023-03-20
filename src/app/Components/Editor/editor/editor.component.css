@@ -347,36 +347,33 @@ h3 {
     align-items: center;
 }
 
-.sub-canvas{
-    background-color: #e2e9f1;
-    /* box-shadow: 0 0 10px rgba(0,0,0,0.2); */
-    padding: 20px;
-    width: 530px;
-    height: 400px;
-    /* float: left; */
-    /* margin-left: 5px; */
-    margin-top: 50px;
-    border-radius: 15px;
-    margin-bottom: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
+.sub-canvas {
+  background-color: #e2e9f1;
+  padding: 20px;
+  width: 530px;
+  height: 400px;
+  margin-top: 50px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-img{
-    /* padding: 20px; */
-    object-fit: contain;
-    width: auto;
-    height: auto;
-    max-width: 100%;
-    max-height: 100%;
-    /* float: left; */
-    /* margin-left: 5px; */
-    /* margin: 10px; */
-    border-radius: 15px;
-    margin-bottom: 50px;
+.sub-canvas-img {
+  object-fit: contain;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 15px;
+  margin: 20px;
 }
+
+table {
+  width: 500px;
+  height: 500px;
+}
+
 
 .btn{
     background-color: #75b2e9;
@@ -862,35 +859,26 @@ h1{
         align-items: center;
     }
     
-    .sub-canvas{
-        background-color: #e2e9f1;
-        /* box-shadow: 0 0 10px rgba(0,0,0,0.2); */
-        padding: 20px;
-        width: 530px;
-        height: 400px;
-        /* float: left; */
-        /* margin-left: 5px; */
-        margin-top: 50px;
-        border-radius: 15px;
-        margin-bottom: 50px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        
+    .sub-canvas {
+      background-color: #e2e9f1;
+      padding: 20px;
+      width: 530px;
+      height: 400px;
+      margin-top: 50px;
+      border-radius: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     
-    img{
-        /* padding: 20px; */
-        object-fit: contain;
-        width: auto;
-        height: auto;
-        max-width: 100%;
-        max-height: 100%;
-        /* float: left; */
-        /* margin-left: 5px; */
-        /* margin: 10px; */
-        border-radius: 15px;
-        margin-bottom: 50px;
+    .sub-canvas-img {
+      object-fit: contain;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 15px;
+      margin: 20px;
     }
     
     .collage{
@@ -898,31 +886,43 @@ h1{
         border-color: #75b2e9;
     }
     .save-btn, .send-btn, .download-btn{
-        border-radius: 1rem;
-        box-sizing: border-box;
-        color: #ffffff;
-        /* display: flex; */
-        font-size: 14px;
-        /* justify-content: center; */
-        padding: 0.6rem ;
-        margin: 10px;
-        text-decoration: none;
-        width: 20%;
-        border: 0;
-        cursor: pointer;
-        user-select: none;
-        -webkit-user-select: none;
-        touch-action: manipulation;
-        background-color: #75b2e9;
-        border-color: #75b2e9;
-        text-align: center;
+      border-radius: 1rem;
+      box-sizing: border-box;
+      color: #ffffff;
+      /* display: flex; */
+      font-size: 14px;
+      /* justify-content: center; */
+      padding: 0.6rem ;
+      margin: 10px;
+      text-decoration: none;
+      width: 25%;
+      border: 0;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      background-color: #75b2e9;
+      border-color: #75b2e9;
+      text-align: center;
+  }
+  
+  .download-btn:hover {
+      color: #fff;
+      background-color: #121b46;
+      border-color: #121b46;
     }
-    
-    .save-btn, .send-btn, .download-btn:hover {
-        color: #fff;
-        background-color: #121b46;
-        border-color: #121b46;
-      }
+  
+    .send-btn:hover {
+      color: #fff;
+      background-color: #121b46;
+      border-color: #121b46;
+    }
+  
+    .save-btn:hover {
+      color: #fff;
+      background-color: #121b46;
+      border-color: #121b46;
+    }
 
       .side-container {
         background-color: #75b2e9;

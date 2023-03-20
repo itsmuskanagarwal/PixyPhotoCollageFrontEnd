@@ -7,7 +7,7 @@
         Select Count
       </button>
       <div class="dropdown-content" *ngIf="showDropdown">
-        <a (click)="count(2)">2 Image Layout</a>
+        <!-- <a (click)="count(2)">2 Image Layout</a> -->
         <a (click)="count(4)">4 Image Layout</a>
         <a (click)="count(9)">9 Image Layout</a>
         <a (click)="count(16)">16 Image Layout</a>
@@ -53,8 +53,8 @@
         <label class="border-slider-label">Border:</label>
         <input
           type="range"
-          min="0"
-          max="10"
+          min="10"
+          max="50"
           value="0"
           class="border-slider-input"
           #borderSlider
@@ -65,12 +65,18 @@
       <div class="color-dropdown">
         <label class="color-dropdown-label">Colour:</label>
         <div class="color-dropdown-squares">
-          <input class="color-input" [style.background]=" color" [colorPicker]="color" (colorPickerChange)="onColorChange($event)"/>      
-        </div>      
+          <input
+            class="color-input"
+            [style.background]="color"
+            [colorPicker]="color"
+            (colorPickerChange)="onColorChange($event)"
+            #colorPicker
+          />
+        </div>
       </div>
     </div>
     <br />
-    <mat-error *ngIf="msg">{{msg}}</mat-error>
+    <mat-error *ngIf="msg">{{ msg }}</mat-error>
     <button class="create-btn" (click)="createCollage()">Create Collage</button>
     <button class="reset-btn">Reset</button>
   </div>
@@ -79,11 +85,43 @@
 
   <div class="main-canvas">
     <div class="sub-canvas">
-      <img class="collage" src="./assets/temp.jpeg" />
+      <img
+        *ngIf="!collage"
+        class="sub-canvas-img"
+        src="./assets/nocollage.png"
+      />
+
+      <!-- Collage making -->
+      <div *ngIf="collage" #elementToConvert>
+        <table
+          [style.border-collapse]="'separate'"
+          [style.border-spacing.px]="border"
+          [style.backgroundColor]="color"
+          style="border-radius: 15px; width: 350px; height: 350px"      
+        >
+          <tr *ngFor="let row of rows">
+            <td
+              *ngFor="let cell of row"
+              [style.width.px]="350 / rows.length"
+              [style.height.px]="350 / rows.length"
+            >
+              <img
+                [src]="cell.src"
+                style="
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  border-radius: 15px;
+                "
+              />
+            </td>
+          </tr>
+        </table>
+      </div>
     </div>
-    <button class="btn save-btn">Save</button>
+    <button class="btn save-btn" (click)="saveProject()">Save</button>
     <button class="btn send-btn">Send</button>
-    <button class="btn download-btn">Download</button>
+    <button class="btn download-btn" (click)="downloadImage()">Download</button>
   </div>
 
   <div class="side-container">

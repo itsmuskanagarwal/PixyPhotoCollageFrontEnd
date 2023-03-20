@@ -38,9 +38,12 @@ getUploadedImages(userId : string): Observable<any> {
 }
 
  //Get all the uploaded images
- getProjects(): Observable<any> {
+ getProjects(userId : string): Observable<any> {
+
+  const headers = new HttpHeaders();
+  const params = new HttpParams().set('userId', userId);
   return this.httpClient
-    .get(`${this.REST_API}/get-projects`)
+    .get(`${this.REST_API}/get-projects`, { headers, params, responseType: 'json' })
     .pipe(
       catchError((error) => {
         console.error('Error getting project images', error);
@@ -50,9 +53,10 @@ getUploadedImages(userId : string): Observable<any> {
 }
 
 //Add final project
-addFinalProject(data: any): Observable<any> {
+addFinalProject(userId: string, data: any): Observable<any> {
+  const headers = new HttpHeaders();
   return this.httpClient
-    .post(`${this.REST_API}/add-final-project`, data, { responseType: 'json' })
+    .post(`${this.REST_API}/add-final-project/${userId}`, data, {headers, responseType: 'json' })
     .pipe(
       catchError((error) => {
         console.error('Error adding final project', error);
