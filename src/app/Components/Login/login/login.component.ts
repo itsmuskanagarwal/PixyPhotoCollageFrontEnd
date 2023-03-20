@@ -25,6 +25,8 @@ export class LoginComponent {
     console.log(email);
     console.log(password);
 
+
+
     this.authService.authenticateUser(email, password).subscribe(
       (response) => {
 
@@ -52,7 +54,7 @@ export class LoginComponent {
       (error) => {
         console.error(error);
         this.validPassword = false;
-        this.msg = 'Invalid email or password';
+        this.msg = 'Invalid email or password. Please verify!';
         // this.msg = 'An error occurred while authenticating';
       }
     );

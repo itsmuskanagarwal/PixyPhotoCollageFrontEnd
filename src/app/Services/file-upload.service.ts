@@ -124,4 +124,22 @@ export class FileUploadService {
         })
       );
   }
+
+  //Send project in mail
+  sendMail(email: string ,filename: string): Observable<any> {
+    console.log(email, filename);
+    const body = { email, filename }
+    return this.httpClient
+      .post(
+        `${this.REST_API}/send-mail`,
+        body,
+        { responseType: 'text' }
+      )
+      .pipe(
+        catchError((error) => {
+          console.error('Error sending project', error);
+          return throwError(() => new Error('Error sending project'));
+        })
+      );
+  }
 }

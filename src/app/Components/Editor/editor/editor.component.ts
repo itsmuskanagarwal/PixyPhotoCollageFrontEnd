@@ -186,6 +186,33 @@ export class EditorComponent {
     });
   }
 
+  sendMail(): void {
+
+    html2canvas(this.elementToConvert.nativeElement, { useCORS: true }).then((canvas) => {
+      canvas.toBlob((blob) => {
+        if (blob) {
+          const formData = new FormData();
+          formData.append('images', blob, 'image.png');
+          this.fileService.addFinalProject(this.user._id,formData).subscribe((response) => {
+            console.log('Project added', response);
+            this.snackBar.open('Project added', 'Close', {
+              duration: 1000
+            });
+
+
+          }, (error) => {
+            console.error('Error adding project', error);
+          });
+        } else {
+          console.error('Error converting canvas to blob');
+        }
+      });
+    });
+
+
+  
+  }
+
   createCollage() {
     console.log('color: ' + this.selectedColor);
     console.log('image: ' + this.images);

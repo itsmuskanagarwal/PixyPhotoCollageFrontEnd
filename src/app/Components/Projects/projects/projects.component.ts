@@ -12,7 +12,8 @@ export class ProjectsComponent {
   projects: any[] = [];
   user: any;
 
-  constructor(private fileService: FileUploadService) {}
+  constructor(private fileService: FileUploadService,
+    private snackBar : MatSnackBar) {}
 
   ngOnInit() {
     const userData = localStorage.getItem('userData');
@@ -88,6 +89,21 @@ export class ProjectsComponent {
     document.body.appendChild(link);
   
     link.click();
+  }
+
+  sendMail(image: string): void {
+
+    const projectImage = image;
+    const currentUser = this.user.email;
+
+    console.log(projectImage)
+    console.log(currentUser)
+  
+    this.fileService.sendMail(currentUser, projectImage).subscribe((res) => {
+      this.snackBar.open('Project file sent successfully', 'Close', {
+        duration: 1000,
+      });
+    });
   }
   
 }

@@ -12,7 +12,7 @@
           <img class="finalimg" src="http://localhost:3000/public/projects/{{ img }}" crossorigin="anonymous">         
         </div>
         <div class="btn-wrapper">
-          <button class="btn send-btn" >Send</button>
+          <button class="btn send-btn" (click)="sendMail(img)" >Send</button>
           <button class="btn delete-btn" (click)="deleteProject(img)">Delete</button>
           <button class="btn download-btn" (click)="downloadProject(img)">Download</button>
       </div>
