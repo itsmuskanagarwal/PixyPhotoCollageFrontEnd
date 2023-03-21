@@ -80,9 +80,12 @@ export class ProfileComponent {
         this.imageUrl = res.toString()
         console.log(this.imageUrl)
         this.authService.profileUpdated = true
+        window.location.reload();
+    
       })
     });
   }
+
 
   passwordMatchValidator(formGroup: FormGroup) {
     const password = formGroup.get('password')?.value;

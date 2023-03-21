@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     console.log('flag');
+    this.imageUrl = ""
     const userData = localStorage.getItem('userData');
     if (userData !== null) {
       this.user = JSON.parse(localStorage.getItem('userData') as string);
@@ -29,6 +30,8 @@ export class HeaderComponent implements OnInit {
         this.imageUrl = res.toString();
         console.log(this.imageUrl);
         console.log(this.user._id);
+
+        this.authService.profileUpdated = false
       });
     }
   }

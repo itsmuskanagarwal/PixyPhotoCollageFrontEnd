@@ -7,6 +7,9 @@ import { FormControl } from '@angular/forms';
 import { ColorPickerDirective } from 'ngx-color-picker';
 import html2canvas from 'html2canvas';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ResetComponent } from '../../Reset/reset/reset.component';
+import { tap, catchError } from 'rxjs/operators';
+import { throwError, filter, delay, take } from 'rxjs';
 
 interface User {
   _id: string;
@@ -24,10 +27,10 @@ interface User {
   styleUrls: ['./editor.component.css'],
 })
 export class EditorComponent {
-
-  user : any;
+  user: any;
   images: any[] = [];
-  users: any[] = [];
+  recentProjects: any[] = [];
+  firstThreeRecentProjects: any[] = [];
   layouts: any[] = [];
   selectedColor: string = '';
   border = 0;
@@ -39,7 +42,8 @@ export class EditorComponent {
   rows: any[][] = [];
   showDropdown: boolean = false;
 
-  @ViewChild('elementToConvert', { static: false }) elementToConvert !: ElementRef;
+  @ViewChild('elementToConvert', { static: false })
+  elementToConvert!: ElementRef;
   @ViewChild('borderSlider', { static: false }) borderSlider!: ElementRef;
   @ViewChild('colorPicker', { static: false })
   colorPicker!: ColorPickerDirective;
@@ -49,38 +53,24 @@ export class EditorComponent {
     private fileService: FileUploadService,
     private dialog: MatDialog,
     private elementRef: ElementRef,
-    private snackBar : MatSnackBar
+    private snackBar: MatSnackBar
   ) {}
 
-
   ngOnInit() {
-    
     const userData = localStorage.getItem('userData');
-  if (userData !== null) {
-    this.user = JSON.parse(localStorage.getItem('userData') as string);
-  }
+    if (userData !== null) {
+      this.user = JSON.parse(localStorage.getItem('userData') as string);
+    }
 
-    this.authService.getUsers().subscribe(
+    this.fileService.getProjects(this.user._id).subscribe(
       (res) => {
-        console.log(typeof res);
-        console.log(res);
-
-        const usersArray = res.users;
-        console.log(typeof usersArray);
-        console.log(usersArray);
-        this.users = [];
-
-        usersArray.forEach((user: any) => {
-          console.log(user.email);
-          console.log(user);
-
-          if (user.email !== this.user.email) {
-            this.users.push(user);
-          }
-        });
-
-        console.log(this.users);
-
+        if (res) {
+          console.log(res);
+          this.recentProjects = [];
+          this.recentProjects = res;
+          this.firstThreeRecentProjects=this.recentProjects.slice(0,3);
+          console.log(this.recentProjects);
+        }
       },
       (error) => {
         console.log(error);
@@ -104,42 +94,58 @@ export class EditorComponent {
 
   downloadImage() {
     if (this.elementToConvert) {
-      console.log("In")
-      
-      html2canvas(this.elementToConvert.nativeElement, { useCORS: true }).then((canvas) => {
-        const imageData = canvas.toDataURL('image/png');
-        const link = document.createElement('a');
-        link.download = 'image.png';
-        link.href = imageData;
-        link.click();
-    });
-    
+      console.log('In');
+
+      html2canvas(this.elementToConvert.nativeElement, { useCORS: true }).then(
+        (canvas) => {
+          const imageData = canvas.toDataURL('image/png');
+          const link = document.createElement('a');
+          console.log(imageData);
+          link.download = 'image.png';
+          link.href = imageData;
+          link.click();
+        }
+      );
     }
   }
 
   saveProject() {
-    console.log("save project");
-    html2canvas(this.elementToConvert.nativeElement, { useCORS: true }).then((canvas) => {
-      canvas.toBlob((blob) => {
-        if (blob) {
-          const formData = new FormData();
-          formData.append('images', blob, 'image.png');
-          this.fileService.addFinalProject(this.user._id,formData).subscribe((response) => {
-            console.log('Project added', response);
-            this.snackBar.open('Project added', 'Close', {
-              duration: 3000
-            });
-          }, (error) => {
-            console.error('Error adding project', error);
-          });
-        } else {
-          console.error('Error converting canvas to blob');
-        }
-      });
-    });
+    console.log('save project');
+    html2canvas(this.elementToConvert.nativeElement, { useCORS: true }).then(
+      (canvas) =>
+        canvas.toBlob((blob) => {
+          if (blob) {
+            const formData = new FormData();
+            formData.append('images', blob, 'image.png');
+
+            this.fileService
+              .addFinalProject(this.user._id, formData)
+              .pipe(
+                tap((response) => console.log('Project added', response)),
+                catchError((error) => {
+                  console.error('Error adding project', error);
+                  return throwError(error);
+                })
+              )
+              .subscribe(() => {
+                const dialogRef = this.dialog.open(ResetComponent, {
+                  data: { editor: this }
+                });
+
+                dialogRef.afterClosed().subscribe( (result) => {
+                  console.log("closing")
+                  if (result == 'yes') {
+                    this.reset();
+                  }
+                });
+              });
+          } else {
+            console.error('Error converting canvas to blob');
+          }
+        })
+    );
   }
 
-  
   count(layout: number) {
     this.showDropdown = !this.showDropdown;
     this.layouts = [];
@@ -187,30 +193,29 @@ export class EditorComponent {
   }
 
   sendMail(): void {
-
-    html2canvas(this.elementToConvert.nativeElement, { useCORS: true }).then((canvas) => {
-      canvas.toBlob((blob) => {
-        if (blob) {
-          const formData = new FormData();
-          formData.append('images', blob, 'image.png');
-          this.fileService.addFinalProject(this.user._id,formData).subscribe((response) => {
-            console.log('Project added', response);
-            this.snackBar.open('Project added', 'Close', {
-              duration: 1000
-            });
-
-
-          }, (error) => {
-            console.error('Error adding project', error);
-          });
-        } else {
-          console.error('Error converting canvas to blob');
-        }
-      });
-    });
-
-
-  
+    html2canvas(this.elementToConvert.nativeElement, { useCORS: true }).then(
+      (canvas) => {
+        canvas.toBlob((blob) => {
+          if (blob) {
+            const formData = new FormData();
+            formData.append('images', blob, 'image.png');
+            this.fileService.addFinalProject(this.user._id, formData).subscribe(
+              (response) => {
+                console.log('Project added', response);
+                this.snackBar.open('Project added', 'Close', {
+                  duration: 1000,
+                });
+              },
+              (error) => {
+                console.error('Error adding project', error);
+              }
+            );
+          } else {
+            console.error('Error converting canvas to blob');
+          }
+        });
+      }
+    );
   }
 
   createCollage() {

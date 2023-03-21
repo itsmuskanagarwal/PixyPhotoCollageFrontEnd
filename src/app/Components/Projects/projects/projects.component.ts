@@ -70,6 +70,8 @@ export class ProjectsComponent {
     console.log(imagePath);
   
     const response = await fetch(`http://localhost:3000/public/projects/${imagePath}`);
+
+    console.log(response)
     const blob = await response.blob();
     const url = URL.createObjectURL(blob);
   

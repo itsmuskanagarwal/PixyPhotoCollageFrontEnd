@@ -16,6 +16,8 @@ import { ProjectsComponent } from './Components/Projects/projects/projects.compo
 import { ImageLibraryComponent } from './Components/ImageLibrary/image-library/image-library.component';
 import { AvatarComponent } from './Components/Avatar/avatar/avatar.component';
 import { SelectImageComponent } from './Components/SelectImage/select-image/select-image.component';
+import { ResetComponent } from './Components/Reset/reset/reset.component';
+
 
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -33,7 +35,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ColorPickerModule } from 'ngx-color-picker';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +49,9 @@ import { ColorPickerModule } from 'ngx-color-picker';
     ProjectsComponent,
     ImageLibraryComponent,
     AvatarComponent,
-    SelectImageComponent
+    SelectImageComponent,
+    ResetComponent,
+    
   ],
   imports: [
     BrowserModule,
