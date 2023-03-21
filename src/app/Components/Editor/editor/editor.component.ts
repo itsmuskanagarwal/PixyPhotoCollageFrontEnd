@@ -224,39 +224,48 @@ export class EditorComponent {
     console.log('border: ' + this.border);
     console.log('count: ' + this.cellCount);
 
-    if (
-      !this.selectedColor ||
-      !this.images.length ||
-      !this.border ||
-      !this.cellCount
-    ) {
-      this.msg = 'Please check all the fields';
-    } else {
-      this.collage = true;
-      if (this.cellCount === 2) {
-        this.rows = Array(2)
-          .fill(null)
-          .map(() => Array(2).fill({ src: this.images[0] })); // Set the path of the first image in the array
+    if(this.cellCount == this.images.length)
+    {
+      if (
+        !this.selectedColor ||
+        !this.images.length ||
+        !this.border ||
+        !this.cellCount
+      ) {
+        this.msg = 'Please check all the fields';
       } else {
-        const numRows = Math.sqrt(this.cellCount);
-        this.rows = Array(numRows)
-          .fill(null)
-          .map(() => Array(numRows).fill(null));
-
-        let imageIndex = 0;
-        for (let i = 0; i < numRows; i++) {
-          for (let j = 0; j < numRows; j++) {
-            if (imageIndex < this.images.length) {
-              const imagePath =
-                'http://localhost:3000/public/images/' +
-                this.images[imageIndex];
-              this.rows[i][j] = { src: imagePath }; // Set the path of the next image in the array
-              imageIndex++;
+        this.collage = true;
+        if (this.cellCount === 2) {
+          this.rows = Array(2)
+            .fill(null)
+            .map(() => Array(2).fill({ src: this.images[0] })); // Set the path of the first image in the array
+        } else {
+          const numRows = Math.sqrt(this.cellCount);
+          this.rows = Array(numRows)
+            .fill(null)
+            .map(() => Array(numRows).fill(null));
+  
+          let imageIndex = 0;
+          for (let i = 0; i < numRows; i++) {
+            for (let j = 0; j < numRows; j++) {
+              if (imageIndex < this.images.length) {
+                const imagePath =
+                  'http://localhost:3000/public/images/' +
+                  this.images[imageIndex];
+                this.rows[i][j] = { src: imagePath }; // Set the path of the next image in the array
+                imageIndex++;
+              }
             }
           }
         }
       }
     }
+
+    else{
+
+     this.msg =`Select ${this.cellCount} no. of images`
+    }
+    
   }
 
   reset() {

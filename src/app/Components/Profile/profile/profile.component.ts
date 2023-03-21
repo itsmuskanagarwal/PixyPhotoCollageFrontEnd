@@ -31,7 +31,8 @@ export class ProfileComponent {
     private ngZone: NgZone,
     private activatedRoute: ActivatedRoute,
     private authService : AuthService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar : MatSnackBar
     // private http: HttpClient
   ) {
     this.updateForm = this.formBuilder.group({
@@ -81,6 +82,9 @@ export class ProfileComponent {
         console.log(this.imageUrl)
         this.authService.profileUpdated = true
         window.location.reload();
+        this.snackBar.open('Profile picture updated!!', 'Close', {
+          duration: 1000,
+        });
     
       })
     });

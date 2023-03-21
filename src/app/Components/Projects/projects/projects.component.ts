@@ -45,6 +45,10 @@ export class ProjectsComponent {
       (res) => {
         console.log('deleted sucessfully');
 
+        this.snackBar.open('Project deleted', 'Close', {
+          duration: 1000,
+        });
+
         this.fileService.getProjects(this.user._id).subscribe(
           (res) => {
             if (res) {
@@ -91,6 +95,10 @@ export class ProjectsComponent {
     document.body.appendChild(link);
   
     link.click();
+
+    this.snackBar.open('Project downloaded', 'Close', {
+      duration: 1000,
+    });
   }
 
   sendMail(image: string): void {
@@ -102,7 +110,7 @@ export class ProjectsComponent {
     console.log(currentUser)
   
     this.fileService.sendMail(currentUser, projectImage).subscribe((res) => {
-      this.snackBar.open('Project file sent successfully', 'Close', {
+      this.snackBar.open('Project sent over mail', 'Close', {
         duration: 1000,
       });
     });
